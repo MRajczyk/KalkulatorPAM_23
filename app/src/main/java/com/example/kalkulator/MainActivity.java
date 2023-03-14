@@ -17,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button_simple = findViewById(R.id.button1);
-        button_simple.setOnClickListener(e -> button_simple.setText("testowo!"));
+        //button_simple = findViewById(R.id.button1);
+        //button_simple.setOnClickListener(e -> button_simple.setText("testowo!"));
         //onSaveInstanceState
         //w onCreate mozna sprawdzic czy to wyzej nie jest nullem i wtedy tam lezy jakies info
         //trzeba dalej sprawdzac
