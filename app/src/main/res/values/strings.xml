@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Name</string>
+    <string name="app_name">PAM23_CALC</string>
     <string name="main_simple">Simple</string>
     <string name="main_advanced">Advanced</string>
     <string name="main_about">About</string>
