@@ -20,9 +20,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
 
     private TextView resultTextView;
     private String enteredExpression = "";
-    private String firstNumber = "";
-    private String secondNumber = "";
-    private String operation = "";
+    private String lastNumber = "";
 
     private final List<Button> numberButtons = new ArrayList<>();
     private final List<Button> operationButtons = new ArrayList<>();
@@ -66,14 +64,8 @@ public class SimpleCalcActivity extends AppCompatActivity {
     private void assignListenersToViews() {
         this.numberButtons.forEach(numberBtn -> {
             numberBtn.setOnClickListener(e -> {
-                this.CCE_flag = false;
-                if(this.operation.equals("")) {
-                    this.firstNumber += numberBtn.getText().toString();
-                    this.redrawExpression();
-                } else {
-                    this.secondNumber += numberBtn.getText().toString();
-                    this.redrawExpression();
-                }
+                this.lastNumber += numberBtn.getText().toString();
+                this.redrawExpression();
             });
         });
 
@@ -99,93 +91,57 @@ public class SimpleCalcActivity extends AppCompatActivity {
                         this.deleteCharacter();
                         break;
                     case ".":
-                        this.CCE_flag = false;
-                        if((this.operation.equals(""))) {
-                            if(this.firstNumber.equals("")) {
-                                this.firstNumber += "0";
-                            }
-                            this.firstNumber += ".";
-                        }
-                        else if((this.secondNumber.equals(""))) {
-                            this.secondNumber += "0" + ".";
-                        }
-                        else {
-                            this.secondNumber += ".";
-                        }
-                        this.redrawExpression();
+                        this.lastNumber += ".";
+                        redrawExpression();
                         break;
-                    //works fine for +/-/+/*/.
+                    //works fine for +/-/+/*
                     default:
-                        this.CCE_flag = false;
-                        if(this.firstNumber.equals("")) {
-                            this.firstNumber = "0";
-                            redrawExpression();
-                            break;
-                        }
-                        if(!(this.operation.equals("")) && !(this.secondNumber.equals(""))) {
-                            this.equal();
-                            this.operation = enteredOp.getText().toString();
-                            this.redrawExpression();
-                            return;
-                        }
-                        this.operation = enteredOp.getText().toString();
+                        this.enteredExpression = this.enteredExpression + this.lastNumber + enteredOp.getText().toString();
+                        this.lastNumber = "";
                         this.redrawExpression();
-                        break;
                 }
             });
         });
     }
 
     private void deleteCharacter() {
-        if(this.secondNumber.length() > 0) {
-            this.secondNumber = this.secondNumber.substring(0, this.secondNumber.length() - 1);
-        } else if(this.operation.length() > 0) {
-            this.operation = "";
+        if(this.lastNumber.length() > 0) {
+            this.lastNumber = this.lastNumber.substring(0, this.lastNumber.length() - 1);
         } else {
-            if(this.firstNumber.length() > 0) {
-                this.firstNumber = this.firstNumber.substring(0, this.firstNumber.length() - 1);
-            }
+            this.enteredExpression = this.enteredExpression.substring(0, this.enteredExpression.length() - 1);
         }
+
         this.redrawExpression();
     }
 
     private void clearEnter() {
-        if(this.CCE_flag || this.firstNumber.equals("")) {
+        if(this.CCE_flag || this.lastNumber.equals("")) {
             this.allClear();
             return;
         }
 
-        if(!(this.secondNumber.equals(""))) {
-            this.secondNumber = "";
-            this.CCE_flag = true;
-        } else {
-            this.operation = "";
-            this.firstNumber = "";
-        }
+        this.lastNumber = "";
+        this.CCE_flag = true;
 
         this.redrawExpression();
     }
 
     private void allClear() {
         this.CCE_flag = false;
-        this.firstNumber = "";
-        this.secondNumber = "";
-        this.operation = "";
         this.enteredExpression = "";
+        this.lastNumber = "";
         this.resultTextView.setText("0");
     }
 
     private void equal() {
         try{
-            double result = new ExpressionBuilder(this.enteredExpression)
+            double result = new ExpressionBuilder(this.enteredExpression + this.lastNumber)
                     .build()
                     .evaluate();
             //rounding to 4 decimal places
             this.enteredExpression = String.valueOf(Math.round(result * 10000.0) / 10000.0);
             this.resultTextView.setText(this.enteredExpression);
-            this.firstNumber = this.enteredExpression.equals("-") ? "-0" : this.enteredExpression;
-            this.operation = "";
-            this.secondNumber = "";
+            this.lastNumber = "";
         } catch(ArithmeticException | IllegalArgumentException e) {
             Toast.makeText(this, "Math expression built incorrectly", Toast.LENGTH_LONG).show();
             this.redrawExpression();
@@ -193,36 +149,28 @@ public class SimpleCalcActivity extends AppCompatActivity {
     }
 
     private void negateNumber() {
-        if(this.secondNumber.equals("")) {
-            if(this.firstNumber.startsWith("-")) {
-                this.firstNumber = this.firstNumber.substring(1);
-            } else if(this.firstNumber.equals("")) {
-                this.firstNumber = "-";
+        if(this.lastNumber.equals("") && this.enteredExpression.length() > 0 && (this.enteredExpression.charAt(this.enteredExpression.length() - 1) >= '0' && this.enteredExpression.charAt(this.enteredExpression.length() - 1) <= '9')) {
+            if(this.enteredExpression.startsWith("-")) {
+                this.enteredExpression = this.enteredExpression.substring(1);
             }
             else {
-                this.firstNumber = "-" + this.firstNumber;
+                this.enteredExpression = "-" + this.enteredExpression;
             }
-        } else {
-            if(this.secondNumber.startsWith("-")) {
-                this.secondNumber = this.secondNumber.substring(1);
-            } else {
-                this.secondNumber = "-" + this.secondNumber;
-            }
+        }
+        else if(this.lastNumber.startsWith("-")) {
+            this.lastNumber = this.lastNumber.substring(1);
+        }
+        else {
+            this.lastNumber = "-" + this.lastNumber;
         }
         this.redrawExpression();
     }
 
     private void redrawExpression() {
-        if(this.firstNumber.equals("-")) {
-            this.enteredExpression = "-0" + this.operation + this.secondNumber;
-        } else if(this.firstNumber.equals("")) {
-            this.enteredExpression = 0 + this.operation + this.secondNumber;
+        if(this.enteredExpression.length() <= 15) {
+            String textToShow = this.enteredExpression + this.lastNumber;
+            this.resultTextView.setText(textToShow);
         } else {
-            this.enteredExpression = this.firstNumber + this.operation + this.secondNumber;
-        }
-        this.resultTextView.setText(this.enteredExpression);
-        if(!(this.enteredExpression.length() <= 15)) {
-            //TODO: maybe use StringBuilder?
             Toast.makeText(this, "Entered expression is too long!", Toast.LENGTH_LONG).show();
         }
     }
@@ -236,18 +184,14 @@ public class SimpleCalcActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putString("ENTERED_EXPRESSION", this.enteredExpression);
-        outState.putString("FIRST_NUMBER", this.firstNumber);
-        outState.putString("SECOND_NUMBER", this.secondNumber);
-        outState.putString("OPERATION", this.operation);
+        outState.putString("LAST_NUMBER", this.lastNumber);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         this.enteredExpression = savedInstanceState.getString("ENTERED_EXPRESSION");
-        this.firstNumber = savedInstanceState.getString("FIRST_NUMBER");
-        this.secondNumber = savedInstanceState.getString("SECOND_NUMBER");
-        this.operation = savedInstanceState.getString("OPERATION");
+        this.lastNumber = savedInstanceState.getString("LAST_NUMBER");
         super.onRestoreInstanceState(savedInstanceState);
         this.redrawExpression();
     }
