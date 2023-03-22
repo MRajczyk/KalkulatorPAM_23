@@ -42,6 +42,18 @@
             android:layout_weight="1">
 
             <Button
+                android:id="@+id/simple_bksp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="28sp"
+                android:text="@string/calc_bksp" />
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="match_parent" />
+
+            <Button
                 android:id="@+id/simple_ac"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

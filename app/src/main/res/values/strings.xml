@@ -28,4 +28,5 @@
     <string name="calc_dot">.</string>
     <string name="calc_CCE">C/CE</string>
     <string name="calc_AC">AC</string>
+    <string name="calc_bksp">BKSP</string>
 </resources>
