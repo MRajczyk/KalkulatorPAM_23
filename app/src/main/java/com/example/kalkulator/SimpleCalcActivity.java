@@ -94,7 +94,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
                         this.CCE_flag = false;
                         this.negateNumber();
                         break;
-                    case "BKSP":
+                    case "DEL":
                         this.CCE_flag = false;
                         this.deleteCharacter();
                         break;
