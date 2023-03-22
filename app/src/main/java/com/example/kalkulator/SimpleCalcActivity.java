@@ -25,7 +25,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
     private String operation = "";
 
     private final List<Button> numberButtons = new ArrayList<>();
-    private final List<Button> simpleOperationButtons = new ArrayList<>();
+    private final List<Button> operationButtons = new ArrayList<>();
 
     private boolean CCE_flag;
 
@@ -51,16 +51,16 @@ public class SimpleCalcActivity extends AppCompatActivity {
         this.numberButtons.add(findViewById(R.id.simple_8));
         this.numberButtons.add(findViewById(R.id.simple_9));
 
-        this.simpleOperationButtons.add(findViewById(R.id.simple_plus));
-        this.simpleOperationButtons.add(findViewById(R.id.simple_minus));
-        this.simpleOperationButtons.add(findViewById(R.id.simple_mult));
-        this.simpleOperationButtons.add(findViewById(R.id.simple_div));
-        this.simpleOperationButtons.add(findViewById(R.id.simple_equals));
-        this.simpleOperationButtons.add(findViewById(R.id.simple_dot));
-        this.simpleOperationButtons.add(findViewById(R.id.simple_cce));
-        this.simpleOperationButtons.add(findViewById(R.id.simple_ac));
-        this.simpleOperationButtons.add(findViewById(R.id.simple_negate));
-        this.simpleOperationButtons.add(findViewById(R.id.simple_bksp));
+        this.operationButtons.add(findViewById(R.id.simple_plus));
+        this.operationButtons.add(findViewById(R.id.simple_minus));
+        this.operationButtons.add(findViewById(R.id.simple_mult));
+        this.operationButtons.add(findViewById(R.id.simple_div));
+        this.operationButtons.add(findViewById(R.id.simple_equals));
+        this.operationButtons.add(findViewById(R.id.simple_dot));
+        this.operationButtons.add(findViewById(R.id.simple_cce));
+        this.operationButtons.add(findViewById(R.id.simple_ac));
+        this.operationButtons.add(findViewById(R.id.simple_negate));
+        this.operationButtons.add(findViewById(R.id.simple_bksp));
     }
 
     private void assignListenersToViews() {
@@ -77,7 +77,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
             });
         });
 
-        this.simpleOperationButtons.forEach(enteredOp -> {
+        this.operationButtons.forEach(enteredOp -> {
             enteredOp.setOnClickListener(e -> {
                 switch(enteredOp.getText().toString()) {
                     case "C/CE":
@@ -236,12 +236,19 @@ public class SimpleCalcActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putString("ENTERED_EXPRESSION", this.enteredExpression);
+        outState.putString("FIRST_NUMBER", this.firstNumber);
+        outState.putString("SECOND_NUMBER", this.secondNumber);
+        outState.putString("OPERATION", this.operation);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         this.enteredExpression = savedInstanceState.getString("ENTERED_EXPRESSION");
+        this.firstNumber = savedInstanceState.getString("FIRST_NUMBER");
+        this.secondNumber = savedInstanceState.getString("SECOND_NUMBER");
+        this.operation = savedInstanceState.getString("OPERATION");
         super.onRestoreInstanceState(savedInstanceState);
+        this.redrawExpression();
     }
 }

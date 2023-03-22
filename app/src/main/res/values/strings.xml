@@ -8,7 +8,7 @@
     <string name="about_title">About:</string>
     <string name="about_author">Author: Mikołaj Rajczyk</string>
     <string name="about_version">v: 1.0.0</string>
-
+    <!--simple and advanced usage-->
     <string name="calc_0">0</string>
     <string name="calc_1">1</string>
     <string name="calc_2">2</string>
@@ -29,4 +29,15 @@
     <string name="calc_CCE">C/CE</string>
     <string name="calc_AC">AC</string>
     <string name="calc_bksp">DEL</string>
+    <string name="calc_base_expr">0</string>
+    <!--advanced usage-->
+    <string name="calc_sin">SIN</string>
+    <string name="calc_cos">COS</string>
+    <string name="calc_tan">TAN</string>
+    <string name="calc_log">LOG</string>
+    <string name="calc_ln">LN</string>
+    <string name="calc_percent">%</string>
+    <string name="calc_sqrt">sqrt</string>
+    <string name="calc_square">x^2</string>
+    <string name="calc_pow">x^y</string>
 </resources>

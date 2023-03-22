@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -24,15 +24,15 @@
             android:gravity="bottom|end"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="50sp"
+            android:textSize="32sp"
             android:visibility="visible"
             tools:visibility="visible"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:orientation="vertical">
 
         <LinearLayout
@@ -46,7 +46,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_bksp" />
 
             <Space
@@ -58,7 +58,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_AC" />
 
             <Space
@@ -70,7 +70,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_CCE" />
 
             <Space
@@ -82,7 +82,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_negate" />
         </LinearLayout>
 
@@ -97,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_7" />
 
             <Space
@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_8" />
 
             <Space
@@ -121,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_9" />
 
             <Space
@@ -133,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_div" />
         </LinearLayout>
 
@@ -148,7 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_4" />
 
             <Space
@@ -160,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_5" />
 
             <Space
@@ -172,7 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_6" />
 
             <Space
@@ -184,7 +184,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_mult" />
         </LinearLayout>
 
@@ -199,7 +199,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_1" />
 
             <Space
@@ -211,7 +211,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_2" />
 
             <Space
@@ -223,7 +223,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_3" />
 
             <Space
@@ -235,7 +235,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_minus" />
         </LinearLayout>
 
@@ -250,7 +250,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_0" />
 
             <Space
@@ -262,7 +262,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_dot" />
 
             <Space
@@ -274,7 +274,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_equals" />
 
             <Space
@@ -286,7 +286,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:text="@string/calc_plus" />
 
         </LinearLayout>
