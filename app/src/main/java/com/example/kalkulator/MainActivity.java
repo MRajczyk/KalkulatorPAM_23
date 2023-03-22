@@ -1,5 +1,7 @@
 package com.example.kalkulator;
 
+import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void changeActivity(Class<?> className) {
         Intent intent = new Intent(this, className);
+        intent.setFlags(FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 }

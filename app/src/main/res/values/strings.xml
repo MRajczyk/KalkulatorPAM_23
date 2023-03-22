@@ -24,7 +24,7 @@
     <string name="calc_mult">*</string>
     <string name="calc_div">/</string>
     <string name="calc_equals">=</string>
-    <string name="calc_chsign">+/-</string>
+    <string name="calc_negate">+/-</string>
     <string name="calc_dot">.</string>
     <string name="calc_CCE">C/CE</string>
     <string name="calc_AC">AC</string>
