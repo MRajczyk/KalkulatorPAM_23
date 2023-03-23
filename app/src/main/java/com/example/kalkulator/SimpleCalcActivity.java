@@ -134,7 +134,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
         this.CCE_flag = false;
         this.enteredExpression = "";
         this.lastNumber = "";
-        this.resultTextView.setText("0");
+        this.resultTextView.setText("");
     }
 
     protected void equal() {

@@ -29,7 +29,6 @@
     <string name="calc_CCE">C/CE</string>
     <string name="calc_AC">AC</string>
     <string name="calc_bksp">DEL</string>
-    <string name="calc_base_expr">0</string>
     <!--advanced usage-->
     <string name="calc_sin">SIN</string>
     <string name="calc_cos">COS</string>

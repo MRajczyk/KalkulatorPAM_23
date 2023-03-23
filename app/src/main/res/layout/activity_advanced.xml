@@ -19,7 +19,7 @@
             android:id="@+id/calc_expression"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/calc_base_expr"
+            android:text=""
             android:clickable="false"
             android:gravity="bottom|end"
             android:textAllCaps="false"

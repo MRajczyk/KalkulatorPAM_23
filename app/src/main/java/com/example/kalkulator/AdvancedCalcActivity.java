@@ -44,7 +44,7 @@ public class AdvancedCalcActivity extends SimpleCalcActivity {
         this.enteredExpression = "";
         this.lastNumber = "";
         this.lastParenthese = "";
-        this.resultTextView.setText("0");
+        this.resultTextView.setText("");
     }
 
     protected void assignAdvancedListenersToViews() {
