@@ -37,7 +37,8 @@
     <string name="calc_log">LOG</string>
     <string name="calc_ln">LN</string>
     <string name="calc_percent">%</string>
-    <string name="calc_sqrt">sqrt</string>
-    <string name="calc_square">x^2</string>
-    <string name="calc_pow">x^y</string>
+    <string name="calc_sqrt">SQRT</string>
+    <string name="calc_square">X^2</string>
+    <string name="calc_pow">X^Y</string>
+    <string name="calc_parentheses">()</string>
 </resources>

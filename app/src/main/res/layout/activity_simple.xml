@@ -16,7 +16,7 @@
 
         <TextView
             android:padding="10dp"
-            android:id="@+id/simple_expression"
+            android:id="@+id/calc_expression"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="0"
@@ -42,7 +42,7 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/simple_bksp"
+                android:id="@+id/calc_bksp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -54,7 +54,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_ac"
+                android:id="@+id/calc_ac"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -66,7 +66,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_cce"
+                android:id="@+id/calc_cce"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -78,7 +78,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_negate"
+                android:id="@+id/calc_negate"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -93,7 +93,7 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/simple_7"
+                android:id="@+id/calc_7"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -105,7 +105,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_8"
+                android:id="@+id/calc_8"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -117,7 +117,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_9"
+                android:id="@+id/calc_9"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -129,7 +129,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_div"
+                android:id="@+id/calc_div"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -144,7 +144,7 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/simple_4"
+                android:id="@+id/calc_4"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -156,7 +156,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_5"
+                android:id="@+id/calc_5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -168,7 +168,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_6"
+                android:id="@+id/calc_6"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -180,7 +180,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_mult"
+                android:id="@+id/calc_mult"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -195,7 +195,7 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/simple_1"
+                android:id="@+id/calc_1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -207,7 +207,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_2"
+                android:id="@+id/calc_2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -219,7 +219,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_3"
+                android:id="@+id/calc_3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -231,7 +231,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_minus"
+                android:id="@+id/calc_minus"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -246,7 +246,7 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/simple_0"
+                android:id="@+id/calc_0"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -258,7 +258,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_dot"
+                android:id="@+id/calc_dot"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -270,7 +270,7 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_equals"
+                android:id="@+id/calc_equals"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -282,13 +282,12 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/simple_plus"
+                android:id="@+id/calc_plus"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="24sp"
                 android:text="@string/calc_plus" />
-
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

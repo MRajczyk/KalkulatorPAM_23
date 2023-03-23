@@ -40,19 +40,6 @@ public class MainActivity extends AppCompatActivity {
         button_exit.setOnClickListener(evt -> {
             System.exit(0);
         });
-
-        // button_simple = findViewById(R.id.button1);
-        //button_simple.setOnClickListener(e -> button_simple.setText("testowo!"));
-        //onSaveInstanceState
-        //w onCreate mozna sprawdzic czy to wyzej nie jest nullem i wtedy tam lezy jakies info
-        //trzeba dalej sprawdzac
-        // jest jeszcze onRestoreInstanceState poprzez get<T> i podac klucz czy nie zwroci nulla
-
-        //jak uruchomic inna aktywnosc z menu:
-        //klasa Intent <wiadomosc(mozna podac w sposob jawny)>
-        // w onClick tworze obiekt intencja i klasa z ktorej zostanie uruchomiona nowa aktywnosc
-        // i klase nowej aktywnosci
-        //metoda startActivityByIntent
     }
 
     private void changeActivity(Class<?> className) {

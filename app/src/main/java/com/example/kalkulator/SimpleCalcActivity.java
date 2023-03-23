@@ -18,58 +18,62 @@ import java.util.List;
 
 public class SimpleCalcActivity extends AppCompatActivity {
 
-    private TextView resultTextView;
-    private String enteredExpression = "";
-    private String lastNumber = "";
+    protected TextView resultTextView;
+    protected String enteredExpression = "";
+    protected String lastNumber = "";
 
-    private final List<Button> numberButtons = new ArrayList<>();
-    private final List<Button> operationButtons = new ArrayList<>();
+    protected final List<Button> numberButtons = new ArrayList<>();
+    protected final List<Button> simpleOperationButtons = new ArrayList<>();
 
-    private boolean CCE_flag;
+    protected boolean CCE_flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple);
 
-        this.resultTextView = findViewById(R.id.simple_expression);
+        this.resultTextView = findViewById(R.id.calc_expression);
         this.initButtons();
-        assignListenersToViews();
+        this.assignSimpleListenersToViews();
     }
 
-    private void initButtons() {
-        this.numberButtons.add(findViewById(R.id.simple_0));
-        this.numberButtons.add(findViewById(R.id.simple_1));
-        this.numberButtons.add(findViewById(R.id.simple_2));
-        this.numberButtons.add(findViewById(R.id.simple_3));
-        this.numberButtons.add(findViewById(R.id.simple_4));
-        this.numberButtons.add(findViewById(R.id.simple_5));
-        this.numberButtons.add(findViewById(R.id.simple_6));
-        this.numberButtons.add(findViewById(R.id.simple_7));
-        this.numberButtons.add(findViewById(R.id.simple_8));
-        this.numberButtons.add(findViewById(R.id.simple_9));
+    protected void initButtons() {
+        this.numberButtons.add(findViewById(R.id.calc_0));
+        this.numberButtons.add(findViewById(R.id.calc_1));
+        this.numberButtons.add(findViewById(R.id.calc_2));
+        this.numberButtons.add(findViewById(R.id.calc_3));
+        this.numberButtons.add(findViewById(R.id.calc_4));
+        this.numberButtons.add(findViewById(R.id.calc_5));
+        this.numberButtons.add(findViewById(R.id.calc_6));
+        this.numberButtons.add(findViewById(R.id.calc_7));
+        this.numberButtons.add(findViewById(R.id.calc_8));
+        this.numberButtons.add(findViewById(R.id.calc_9));
 
-        this.operationButtons.add(findViewById(R.id.simple_plus));
-        this.operationButtons.add(findViewById(R.id.simple_minus));
-        this.operationButtons.add(findViewById(R.id.simple_mult));
-        this.operationButtons.add(findViewById(R.id.simple_div));
-        this.operationButtons.add(findViewById(R.id.simple_equals));
-        this.operationButtons.add(findViewById(R.id.simple_dot));
-        this.operationButtons.add(findViewById(R.id.simple_cce));
-        this.operationButtons.add(findViewById(R.id.simple_ac));
-        this.operationButtons.add(findViewById(R.id.simple_negate));
-        this.operationButtons.add(findViewById(R.id.simple_bksp));
+        this.simpleOperationButtons.add(findViewById(R.id.calc_plus));
+        this.simpleOperationButtons.add(findViewById(R.id.calc_minus));
+        this.simpleOperationButtons.add(findViewById(R.id.calc_mult));
+        this.simpleOperationButtons.add(findViewById(R.id.calc_div));
+        this.simpleOperationButtons.add(findViewById(R.id.calc_equals));
+        this.simpleOperationButtons.add(findViewById(R.id.calc_dot));
+        this.simpleOperationButtons.add(findViewById(R.id.calc_cce));
+        this.simpleOperationButtons.add(findViewById(R.id.calc_ac));
+        this.simpleOperationButtons.add(findViewById(R.id.calc_negate));
+        this.simpleOperationButtons.add(findViewById(R.id.calc_bksp));
     }
 
-    private void assignListenersToViews() {
+    protected void assignSimpleListenersToViews() {
         this.numberButtons.forEach(numberBtn -> {
             numberBtn.setOnClickListener(e -> {
+                if(!this.lastNumber.equals("-") && this.lastNumber.length() > 0 && !(this.lastNumber.charAt(0) >= '0' && this.lastNumber.charAt(0) <= '9') || (this.lastNumber.length() > 1 && this.lastNumber.startsWith("-") && !(this.lastNumber.charAt(1) >= '0' && this.lastNumber.charAt(1) <= '9'))) {
+                    this.enteredExpression += this.lastNumber;
+                    this.lastNumber = "";
+                }
                 this.lastNumber += numberBtn.getText().toString();
                 this.redrawExpression();
             });
         });
 
-        this.operationButtons.forEach(enteredOp -> {
+        this.simpleOperationButtons.forEach(enteredOp -> {
             enteredOp.setOnClickListener(e -> {
                 switch(enteredOp.getText().toString()) {
                     case "C/CE":
@@ -104,7 +108,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
         });
     }
 
-    private void deleteCharacter() {
+    protected void deleteCharacter() {
         if(this.lastNumber.length() > 0) {
             this.lastNumber = this.lastNumber.substring(0, this.lastNumber.length() - 1);
         } else {
@@ -114,7 +118,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
         this.redrawExpression();
     }
 
-    private void clearEnter() {
+    protected void clearEnter() {
         if(this.CCE_flag || this.lastNumber.equals("")) {
             this.allClear();
             return;
@@ -126,14 +130,14 @@ public class SimpleCalcActivity extends AppCompatActivity {
         this.redrawExpression();
     }
 
-    private void allClear() {
+    protected void allClear() {
         this.CCE_flag = false;
         this.enteredExpression = "";
         this.lastNumber = "";
         this.resultTextView.setText("0");
     }
 
-    private void equal() {
+    protected void equal() {
         try{
             double result = new ExpressionBuilder(this.enteredExpression + this.lastNumber)
                     .build()
@@ -144,11 +148,10 @@ public class SimpleCalcActivity extends AppCompatActivity {
             this.lastNumber = "";
         } catch(ArithmeticException | IllegalArgumentException e) {
             Toast.makeText(this, "Math expression built incorrectly", Toast.LENGTH_LONG).show();
-            this.redrawExpression();
         }
     }
 
-    private void negateNumber() {
+    protected void negateNumber() {
         if(this.lastNumber.equals("") && this.enteredExpression.length() > 0 && (this.enteredExpression.charAt(this.enteredExpression.length() - 1) >= '0' && this.enteredExpression.charAt(this.enteredExpression.length() - 1) <= '9')) {
             if(this.enteredExpression.startsWith("-")) {
                 this.enteredExpression = this.enteredExpression.substring(1);
@@ -166,7 +169,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
         this.redrawExpression();
     }
 
-    private void redrawExpression() {
+    protected void redrawExpression() {
         if(this.enteredExpression.length() <= 15) {
             String textToShow = this.enteredExpression + this.lastNumber;
             this.resultTextView.setText(textToShow);
@@ -175,7 +178,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
         }
     }
 
-    private void changeActivity(Class<?> className) {
+    protected void changeActivity(Class<?> className) {
         Intent intent = new Intent(this, className);
         intent.setFlags(FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
