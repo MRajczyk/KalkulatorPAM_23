@@ -2,6 +2,7 @@ package com.example.kalkulator;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,10 @@ public class AdvancedCalcActivity extends SimpleCalcActivity {
     protected void assignAdvancedListenersToViews() {
         this.advancedOperationButtons.forEach(enteredOp -> {
             enteredOp.setOnClickListener(e -> {
+                if(this.enteredExpression.length() + this.lastNumber.length() > 15) {
+                    Toast.makeText(this, "Entered expression is too long!", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 switch(enteredOp.getText().toString()) {
                     case "SIN":
                         this.enteredExpression = this.enteredExpression + this.lastNumber;

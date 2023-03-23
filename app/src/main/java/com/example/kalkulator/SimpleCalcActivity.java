@@ -64,10 +64,15 @@ public class SimpleCalcActivity extends AppCompatActivity {
     protected void assignSimpleListenersToViews() {
         this.numberButtons.forEach(numberBtn -> {
             numberBtn.setOnClickListener(e -> {
+                if(this.enteredExpression.length() + this.lastNumber.length() > 15) {
+                    Toast.makeText(this, "Entered expression is too long!", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if(!this.lastNumber.equals("-") && this.lastNumber.length() > 0 && !(this.lastNumber.charAt(0) >= '0' && this.lastNumber.charAt(0) <= '9') || (this.lastNumber.length() > 1 && this.lastNumber.startsWith("-") && !(this.lastNumber.charAt(1) >= '0' && this.lastNumber.charAt(1) <= '9'))) {
                     this.enteredExpression += this.lastNumber;
                     this.lastNumber = "";
                 }
+                this.CCE_flag = false;
                 this.lastNumber += numberBtn.getText().toString();
                 this.redrawExpression();
             });
@@ -95,11 +100,19 @@ public class SimpleCalcActivity extends AppCompatActivity {
                         this.deleteCharacter();
                         break;
                     case ".":
+                        if(this.enteredExpression.length() + this.lastNumber.length() > 15) {
+                            Toast.makeText(this, "Entered expression is too long!", Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         this.lastNumber += ".";
                         redrawExpression();
                         break;
                     //works fine for +/-/+/*
                     default:
+                        if(this.enteredExpression.length() + this.lastNumber.length() > 15) {
+                            Toast.makeText(this, "Entered expression is too long!", Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         this.enteredExpression = this.enteredExpression + this.lastNumber + enteredOp.getText().toString();
                         this.lastNumber = "";
                         this.redrawExpression();
@@ -120,6 +133,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
 
     protected void clearEnter() {
         if(this.CCE_flag || this.lastNumber.equals("")) {
+            this.CCE_flag = false;
             this.allClear();
             return;
         }
@@ -170,7 +184,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
     }
 
     protected void redrawExpression() {
-        if(this.enteredExpression.length() <= 15) {
+        if(this.enteredExpression.length() + this.lastNumber.length() <= 15) {
             String textToShow = this.enteredExpression + this.lastNumber;
             this.resultTextView.setText(textToShow);
         } else {

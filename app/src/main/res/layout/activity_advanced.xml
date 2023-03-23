@@ -24,7 +24,10 @@
             android:gravity="bottom|end"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:autoSizeMaxTextSize="40sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
             android:visibility="visible"
             tools:visibility="visible"/>
     </LinearLayout>
