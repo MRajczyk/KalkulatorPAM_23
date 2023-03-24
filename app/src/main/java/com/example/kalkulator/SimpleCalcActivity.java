@@ -131,7 +131,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
             this.lastNumber = this.lastNumber.substring(0, this.lastNumber.length() - 1);
         } else {
             if(this.lastParenthese.length() > 0 && (this.enteredExpression.charAt(this.enteredExpression.length() - 1) == '(' || this.enteredExpression.charAt(this.enteredExpression.length() - 1) == ')')) {
-                this.lastParenthese = this.lastNumber.substring(0, this.lastParenthese.length() - 1);
+                this.lastParenthese = this.lastParenthese.substring(0, this.lastParenthese.length() - 1);
             }
             this.enteredExpression = this.enteredExpression.substring(0, this.enteredExpression.length() - 1);
         }
