@@ -22,7 +22,6 @@ public class SimpleCalcActivity extends AppCompatActivity {
     protected TextView resultTextView;
     protected String enteredExpression = "";
     protected String lastNumber = "";
-    protected String lastParenthese = "";
 
     protected final List<Button> numberButtons = new ArrayList<>();
     protected final List<Button> simpleOperationButtons = new ArrayList<>();
@@ -125,14 +124,9 @@ public class SimpleCalcActivity extends AppCompatActivity {
 
     protected void deleteCharacter() {
         if(this.lastNumber.length() > 0) {
-            if(this.lastParenthese.length() > 0 && (this.lastNumber.charAt(this.lastNumber.length() - 1) == '(' || this.lastNumber.charAt(this.lastNumber.length() - 1) == ')')) {
-                this.lastParenthese = this.lastNumber.substring(0, this.lastParenthese.length() - 1);
-            }
+
             this.lastNumber = this.lastNumber.substring(0, this.lastNumber.length() - 1);
         } else {
-            if(this.lastParenthese.length() > 0 && (this.enteredExpression.charAt(this.enteredExpression.length() - 1) == '(' || this.enteredExpression.charAt(this.enteredExpression.length() - 1) == ')')) {
-                this.lastParenthese = this.lastParenthese.substring(0, this.lastParenthese.length() - 1);
-            }
             this.enteredExpression = this.enteredExpression.substring(0, this.enteredExpression.length() - 1);
         }
 
@@ -224,7 +218,6 @@ public class SimpleCalcActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putString("ENTERED_EXPRESSION", this.enteredExpression);
         outState.putString("LAST_NUMBER", this.lastNumber);
-        outState.putString("PARENTHESES_STATE", this.lastParenthese);
         super.onSaveInstanceState(outState);
     }
 
@@ -232,7 +225,6 @@ public class SimpleCalcActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         this.enteredExpression = savedInstanceState.getString("ENTERED_EXPRESSION");
         this.lastNumber = savedInstanceState.getString("LAST_NUMBER");
-        this.lastParenthese = savedInstanceState.getString("PARENTHESES_STATE");
         super.onRestoreInstanceState(savedInstanceState);
         this.redrawExpression();
     }

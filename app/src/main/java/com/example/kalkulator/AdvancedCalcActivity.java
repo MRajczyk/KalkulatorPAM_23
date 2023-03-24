@@ -44,7 +44,6 @@ public class AdvancedCalcActivity extends SimpleCalcActivity {
         this.CCE_flag = false;
         this.enteredExpression = "";
         this.lastNumber = "";
-        this.lastParenthese = "";
         this.resultTextView.setText("");
     }
 
@@ -59,37 +58,29 @@ public class AdvancedCalcActivity extends SimpleCalcActivity {
                     case "SIN":
                         this.enteredExpression = this.enteredExpression + this.lastNumber;
                         this.lastNumber = "sin(";
-                        this.lastParenthese += "(";
                         break;
                     case "COS":
                         this.enteredExpression = this.enteredExpression + this.lastNumber;
                         this.lastNumber = "cos(";
-                        this.lastParenthese += "(";
                         break;
                     case "TAN":
                         this.enteredExpression = this.enteredExpression + this.lastNumber;
                         this.lastNumber = "tan(";
-                        this.lastParenthese += "(";
                         break;
                     case "LN":
                         this.enteredExpression = this.enteredExpression + this.lastNumber;
                         this.lastNumber = "log(";
-                        this.lastParenthese += "(";
                         break;
                     case "LOG":
                         this.enteredExpression = this.enteredExpression + this.lastNumber;
                         this.lastNumber = "log10(";
-                        this.lastParenthese += "(";
                         break;
                     case "()":
-                        if(lastParenthese.endsWith("(")) {
+                        if((this.enteredExpression + this.lastNumber).chars().filter(x -> x == '(').count() > (this.enteredExpression + this.lastNumber).chars().filter(x -> x == ')').count()) {
                             this.enteredExpression = this.enteredExpression + this.lastNumber + ")";
-                            this.lastParenthese = this.lastParenthese.substring(0, this.lastParenthese.length() - 1);
-                        }
-                        else {
+                        } else {
                             this.enteredExpression += this.lastNumber;
                             this.enteredExpression += "(";
-                            this.lastParenthese += "(";
                         }
                         this.lastNumber = "";
                         break;
@@ -100,7 +91,6 @@ public class AdvancedCalcActivity extends SimpleCalcActivity {
                     case "SQRT":
                         this.enteredExpression = this.enteredExpression + this.lastNumber;
                         this.lastNumber = "sqrt(";
-                        this.lastParenthese += "(";
                         break;
                     case "%":
                         this.enteredExpression = this.enteredExpression + this.lastNumber + "%";
