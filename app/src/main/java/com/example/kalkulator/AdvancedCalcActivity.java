@@ -4,14 +4,14 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdvancedCalcActivity extends SimpleCalcActivity {
 
     protected final List<Button> advancedOperationButtons = new ArrayList<>();
-
-    String lastParenthese = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class AdvancedCalcActivity extends SimpleCalcActivity {
     protected void assignAdvancedListenersToViews() {
         this.advancedOperationButtons.forEach(enteredOp -> {
             enteredOp.setOnClickListener(e -> {
-                if(this.enteredExpression.length() + this.lastNumber.length() > 15) {
+                if(this.enteredExpression.length() + this.lastNumber.length() + enteredOp.getText().toString().length() > this.maxExpressionLength) {
                     Toast.makeText(this, "Entered expression is too long!", Toast.LENGTH_LONG).show();
                     return;
                 }

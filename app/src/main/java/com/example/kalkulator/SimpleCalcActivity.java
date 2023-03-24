@@ -18,9 +18,11 @@ import java.util.List;
 
 public class SimpleCalcActivity extends AppCompatActivity {
 
+    protected final int maxExpressionLength = 20;
     protected TextView resultTextView;
     protected String enteredExpression = "";
     protected String lastNumber = "";
+    protected String lastParenthese = "";
 
     protected final List<Button> numberButtons = new ArrayList<>();
     protected final List<Button> simpleOperationButtons = new ArrayList<>();
@@ -64,7 +66,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
     protected void assignSimpleListenersToViews() {
         this.numberButtons.forEach(numberBtn -> {
             numberBtn.setOnClickListener(e -> {
-                if(this.enteredExpression.length() + this.lastNumber.length() > 15) {
+                if(this.enteredExpression.length() + this.lastNumber.length() + numberBtn.getText().toString().length() > this.maxExpressionLength) {
                     Toast.makeText(this, "Entered expression is too long!", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -100,7 +102,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
                         this.deleteCharacter();
                         break;
                     case ".":
-                        if(this.enteredExpression.length() + this.lastNumber.length() > 15) {
+                        if(this.enteredExpression.length() + this.lastNumber.length() > this.maxExpressionLength) {
                             Toast.makeText(this, "Entered expression is too long!", Toast.LENGTH_LONG).show();
                             return;
                         }
@@ -109,7 +111,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
                         break;
                     //works fine for +/-/+/*
                     default:
-                        if(this.enteredExpression.length() + this.lastNumber.length() > 15) {
+                        if(this.enteredExpression.length() + this.lastNumber.length() > this.maxExpressionLength) {
                             Toast.makeText(this, "Entered expression is too long!", Toast.LENGTH_LONG).show();
                             return;
                         }
@@ -123,8 +125,14 @@ public class SimpleCalcActivity extends AppCompatActivity {
 
     protected void deleteCharacter() {
         if(this.lastNumber.length() > 0) {
+            if(this.lastParenthese.length() > 0 && (this.lastNumber.charAt(this.lastNumber.length() - 1) == '(' || this.lastNumber.charAt(this.lastNumber.length() - 1) == ')')) {
+                this.lastParenthese = this.lastNumber.substring(0, this.lastParenthese.length() - 1);
+            }
             this.lastNumber = this.lastNumber.substring(0, this.lastNumber.length() - 1);
         } else {
+            if(this.lastParenthese.length() > 0 && (this.enteredExpression.charAt(this.enteredExpression.length() - 1) == '(' || this.enteredExpression.charAt(this.enteredExpression.length() - 1) == ')')) {
+                this.lastParenthese = this.lastNumber.substring(0, this.lastParenthese.length() - 1);
+            }
             this.enteredExpression = this.enteredExpression.substring(0, this.enteredExpression.length() - 1);
         }
 
@@ -153,13 +161,19 @@ public class SimpleCalcActivity extends AppCompatActivity {
 
     protected void equal() {
         try{
+            String enteredExp = this.enteredExpression + this.lastNumber;
+            if(enteredExp.contains("sqrt(-") || enteredExp.contains("log10(-") || enteredExp.contains("log(-")) {
+                Toast.makeText(this, "Math expression built incorrectly", Toast.LENGTH_LONG).show();
+                return;
+            }
             double result = new ExpressionBuilder(this.enteredExpression + this.lastNumber)
                     .build()
                     .evaluate();
             //rounding to 4 decimal places
             this.enteredExpression = String.valueOf(Math.round(result * 10000.0) / 10000.0);
             this.resultTextView.setText(this.enteredExpression);
-            this.lastNumber = "";
+            this.lastNumber = this.enteredExpression;
+            this.enteredExpression = "";
         } catch(ArithmeticException | IllegalArgumentException e) {
             Toast.makeText(this, "Math expression built incorrectly", Toast.LENGTH_LONG).show();
         }
@@ -171,6 +185,10 @@ public class SimpleCalcActivity extends AppCompatActivity {
                 this.enteredExpression = this.enteredExpression.substring(1);
             }
             else {
+                if(this.enteredExpression.length() + this.lastNumber.length() + "-".length() > this.maxExpressionLength) {
+                    Toast.makeText(this, "Entered expression is too long!", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 this.enteredExpression = "-" + this.enteredExpression;
             }
         }
@@ -178,13 +196,17 @@ public class SimpleCalcActivity extends AppCompatActivity {
             this.lastNumber = this.lastNumber.substring(1);
         }
         else {
+            if(this.enteredExpression.length() + this.lastNumber.length() + "-".length() > this.maxExpressionLength) {
+                Toast.makeText(this, "Entered expression is too long!", Toast.LENGTH_LONG).show();
+                return;
+            }
             this.lastNumber = "-" + this.lastNumber;
         }
         this.redrawExpression();
     }
 
     protected void redrawExpression() {
-        if(this.enteredExpression.length() + this.lastNumber.length() <= 15) {
+        if(this.enteredExpression.length() + this.lastNumber.length() <= maxExpressionLength) {
             String textToShow = this.enteredExpression + this.lastNumber;
             this.resultTextView.setText(textToShow);
         } else {
@@ -202,6 +224,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putString("ENTERED_EXPRESSION", this.enteredExpression);
         outState.putString("LAST_NUMBER", this.lastNumber);
+        outState.putString("PARENTHESES_STATE", this.lastParenthese);
         super.onSaveInstanceState(outState);
     }
 
@@ -209,6 +232,7 @@ public class SimpleCalcActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         this.enteredExpression = savedInstanceState.getString("ENTERED_EXPRESSION");
         this.lastNumber = savedInstanceState.getString("LAST_NUMBER");
+        this.lastParenthese = savedInstanceState.getString("PARENTHESES_STATE");
         super.onRestoreInstanceState(savedInstanceState);
         this.redrawExpression();
     }
